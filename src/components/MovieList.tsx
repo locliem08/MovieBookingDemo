@@ -6,12 +6,13 @@ import MovieCard from './MovieCard';
 interface MovieListProps {
     movies: Movie[];
     isBooked?: boolean;
+    type: 'movies' | 'favorite' | 'booked';
     ListEmptyComponent?: React.ReactElement;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ movies, isBooked, ListEmptyComponent }) => {
-    const renderItem = React.useCallback(({ item }: { item: Movie }) => (
-        <MovieCard movie={item} isBooked={isBooked} />
+const MovieList: React.FC<MovieListProps> = ({ movies, isBooked, ListEmptyComponent, type }) => {
+    const renderItem = React.useCallback(({ item, index }: { item: Movie, index: number }) => (
+        <MovieCard movie={item} index={index} type={type} isBooked={isBooked} />
     ), []);
 
     return (
@@ -23,9 +24,10 @@ const MovieList: React.FC<MovieListProps> = ({ movies, isBooked, ListEmptyCompon
             getItemLayout={(data, index) => (
                 { length: 170, offset: 170 * index, index }
             )}
-            initialNumToRender={10}
-            maxToRenderPerBatch={15}
-            windowSize={31}
+            initialNumToRender={6}
+            maxToRenderPerBatch={12}
+            windowSize={22}
+            testID={`MovieList-${type}`}
             removeClippedSubviews={true}
         />
     );

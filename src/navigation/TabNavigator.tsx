@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import FavoritesScreen from '../screens/FavoritesScreen/FavoritesScreen';
-import BookedScreen from '../screens/BookedScreen/BookedScreen';
+import HomeScreen from '@screens/HomeScreen/HomeScreen';
+import FavoritesScreen from '@screens/FavoritesScreen/FavoritesScreen';
+import BookedScreen from '@screens/BookedScreen/BookedScreen';
 
 type TabParamList = {
   Movies: undefined;

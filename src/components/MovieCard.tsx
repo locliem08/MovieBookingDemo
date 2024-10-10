@@ -8,15 +8,18 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { addFavorite, removeFavorite } from '../redux/slices/favoritesSlice';
 import Button from './common/Button';
 import ImageCus from './common/ImageCus';
+import { COLORS } from '../utils/styles';
 
 interface MovieCardProps {
     movie: Movie;
     isBooked?: boolean;
+    index: number;
+    type: 'movies' | 'favorite' | 'booked';
 }
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Tabs'>;
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie, isBooked }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie, isBooked, index, type }) => {
     const dispatch = useAppDispatch();
     const navigation = useNavigation<NavigationProp>();
     const favorites = useAppSelector(state => state.favorites.favorites);
@@ -35,23 +38,26 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, isBooked }) => {
     };
 
     return (
-        <TouchableOpacity onPress={handleBook} style={styles.card}>
+        <TouchableOpacity onPress={handleBook} style={styles.card} testID={`MovieCard-${type}`}>
             <ImageCus uri={movie.thumbnail} style={styles.thumbnail} />
             <View style={styles.info}>
                 <Text style={styles.title}>{movie.title}</Text>
                 <Text style={styles.description} numberOfLines={3}>
                     {movie.description}
                 </Text>
+
                 <View style={styles.buttons}>
                     <Button
-                        title={movie.booked ? 'Đã xem' : 'Đặt vé'}
+                        title={isBooked ? 'Chi tiết' : movie.booked ? 'Đã xem' : 'Đặt vé'}
                         onPress={handleBook}
                         disabled={movie.booked}
+                        testID={movie.booked ? `Booked-${index}` : `Book-${index}`}
                         style={movie.booked ? styles.buttonDisabled : styles.buttonActive}
                     />
                     <Button
                         title="Yêu thích"
                         onPress={handleFavorite}
+                        testID={isFavorite ? `Favorite-${index}` : `UnFavorite-${index}`}
                         style={isFavorite ? styles.buttonFavorite : styles.buttonActive}
                     />
                 </View>
@@ -99,13 +105,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     buttonActive: {
-        backgroundColor: 'blue',
+        backgroundColor: COLORS.active,
     },
     buttonDisabled: {
-        backgroundColor: 'gray',
+        backgroundColor: COLORS.disabled,
     },
     buttonFavorite: {
-        backgroundColor: 'red',
+        backgroundColor: COLORS.favorite,
     },
 });
 

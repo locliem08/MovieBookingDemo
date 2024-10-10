@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import {
     View,
     Text,
@@ -6,12 +6,11 @@ import {
     TextInput,
     StyleSheet,
 } from 'react-native';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooksRedux';
-import { fetchMoviesRequest } from '../../redux/slices/moviesSlice';
-import Images from '../../assets/Images';
-import MovieList from '../../components/MovieList';
+import { useAppDispatch, useAppSelector } from '@hooks/hooksRedux';
+import { fetchMoviesRequest } from '@redux/slices/moviesSlice';
+import Images from '@assets/Images';
 import debounce from 'lodash.debounce'; // Sử dụng lodash.debounce cho debounce
-
+import MovieList from '@components/MovieList';
 const HomeScreen: React.FC = () => {
     const dispatch = useAppDispatch();
     const { allMovies, loading, error } = useAppSelector(state => state.movies);
@@ -55,7 +54,7 @@ const HomeScreen: React.FC = () => {
             </View>
         );
     }
-
+   
     return (
         <ImageBackground
             source={Images.bgrImgApp}
@@ -70,10 +69,13 @@ const HomeScreen: React.FC = () => {
                     onChangeText={handleSearch}
                     returnKeyType="search"
                     clearButtonMode="while-editing"
+                    testID='searchInput'
                 />
             </View>
             {filteredMovies.length > 0 ? (
-                <MovieList movies={filteredMovies} />
+                <MovieList 
+                    type='movies'
+                    movies={filteredMovies} />
             ) : (
                 <View style={styles.noResultsContainer}>
                     <Text style={styles.noResultsText}>Không tìm thấy phim nào.</Text>

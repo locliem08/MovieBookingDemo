@@ -8,7 +8,7 @@ export async function getListMovie(record: number) {
     return new Promise((res, rej) => {
         setTimeout(() => {
             res(data)
-        }, 2000)
+        }, 500)
     })
 };
 

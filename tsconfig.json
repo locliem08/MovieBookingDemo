@@ -7,6 +7,34 @@
     "typeRoots": [
       "./node_modules/@types",
       "./src/types"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@redux/*": [
+        "src/redux/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@screens/*": [
+        "src/screens/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@navigation/*": [
+        "src/navigation/*"
+      ],
+      // Thêm các paths khác tương ứng với alias trong babel.config.js
+    }
   }
 }

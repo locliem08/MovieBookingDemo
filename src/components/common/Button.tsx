@@ -1,4 +1,3 @@
-// src/components/common/Button.tsx
 import React from 'react';
 import {
   TouchableOpacity,
@@ -8,6 +7,7 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
+import { COLORS } from '@utils/styles';
 
 interface ButtonProps {
   title: string;
@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonActive: {
-    backgroundColor: '#007BFF', // Màu xanh cho nút hoạt động
+    backgroundColor: COLORS.active, // Màu xanh cho nút hoạt động
   },
   buttonDisabled: {
-    backgroundColor: '#6c757d', // Màu xám cho nút bị vô hiệu hóa
+    backgroundColor: COLORS.disabled, // Màu xám cho nút bị vô hiệu hóa
   },
   buttonText: {
     color: '#fff',

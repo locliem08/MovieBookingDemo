@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useAppSelector } from '../../hooks/hooksRedux';
-import MovieList from '../../components/MovieList';
-import EmptyListMessage from '../../components/EmptyListMessage';
+import { View, StyleSheet } from 'react-native';
+import { useAppSelector } from '@hooks/hooksRedux';
+import MovieList from '@components/MovieList';
+import EmptyListMessage from '@components/EmptyListMessage';
 
 const FavoritesScreen: React.FC = () => {
   const favorites = useAppSelector(state => state.favorites.favorites);
@@ -10,6 +10,7 @@ const FavoritesScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <MovieList
+        type='favorite'
         movies={favorites}
         ListEmptyComponent={<EmptyListMessage message="Không có phim yêu thích nào." />} />
     </View>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useAppSelector } from '../../hooks/hooksRedux';
-import MovieList from '../../components/MovieList';
-import EmptyListMessage from '../../components/EmptyListMessage';
+import { useAppSelector } from '@hooks/hooksRedux';
+import MovieList from '@components/MovieList';
+import EmptyListMessage from '@components/EmptyListMessage';
 
 const BookedScreen: React.FC = () => {
   const booked = useAppSelector(state => state.booked.booked);
@@ -10,6 +10,7 @@ const BookedScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <MovieList
+        type='booked'
         movies={booked}
         isBooked={true}
         ListEmptyComponent={<EmptyListMessage message="Không có phim nào đã đặt vé." />} />

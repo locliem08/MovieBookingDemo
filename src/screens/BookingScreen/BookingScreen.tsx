@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, useWindowDimensions } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { RootStackParamList } from '../../navigation/RootNavigator';
-import { useAppSelector, useAppDispatch } from '../../hooks/hooksRedux';
-import { bookMovie } from '../../redux/slices/bookedSlice';
-import Button from '../../components/common/Button';
-import ImageCus from '../../components/common/ImageCus';
+import { RootStackParamList } from '@navigation/RootNavigator';
+import { useAppSelector, useAppDispatch } from '@hooks/hooksRedux';
+import { bookMovie } from '@redux/slices/bookedSlice';
+import Button from '@components/common/Button';
+import ImageCus from '@components/common/ImageCus';
+import { COLORS } from '@utils/styles';
 
 type BookingScreenRouteProp = RouteProp<RootStackParamList, 'Booking'>;
 
@@ -41,7 +42,7 @@ const BookingScreen: React.FC = () => {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent} testID='BookingScreen'>
             <View style={styles.container}>
                 <ImageCus uri={movie.thumbnail} style={thumbnailStyle} />
                 <Text style={styles.title}>{movie.title}</Text>
@@ -51,7 +52,7 @@ const BookingScreen: React.FC = () => {
                     onPress={handleConfirmBooking}
                     disabled={movie.booked}
                     style={buttonStyle}
-                    testID={`ConfirmBookingButton-${movie.id}`}
+                    testID={`ConfirmBookingButton`}
                 />
             </View>
         </ScrollView>
@@ -83,10 +84,10 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     buttonActive: {
-        backgroundColor: 'blue',
+        backgroundColor: COLORS.active,
     },
     buttonDisabled: {
-        backgroundColor: 'gray',
+        backgroundColor: COLORS.disabled,
     },
 });
 

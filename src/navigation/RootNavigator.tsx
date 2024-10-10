@@ -1,7 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
-import BookingScreen from '../screens/BookingScreen/BookingScreen';
+import BookingScreen from '@screens/BookingScreen/BookingScreen';
+import { TouchableOpacity, Text } from 'react-native';
 
 export type RootStackParamList = {
     Tabs: undefined;
@@ -21,7 +22,17 @@ const RootNavigator: React.FC = () => {
             <Stack.Screen
                 name="Booking"
                 component={BookingScreen}
-                options={{ title: 'Đặt vé' }}
+                options={({ navigation }) => ({
+                    title: 'Đặt vé',
+                    headerLeft: () => (
+                        <TouchableOpacity
+                            onPress={() => navigation.goBack()}
+                            testID="BookingScreenBackButton"
+                        >
+                            <Text>Back</Text>
+                        </TouchableOpacity>
+                    ),
+                })}
             />
         </Stack.Navigator>
     );
